@@ -1,0 +1,289 @@
+.header {
+    @extend .flex;
+    @extend .flex-wrap;
+    @extend .flex-v-start;
+    @extend .flex-h-center;
+    width: 100%;
+    position: absolute;
+    z-index: 999;
+    background: transparent;
+    top: 0;
+    left: 0;
+    padding: 45px 0;
+    &__cont {
+        width: 100%;
+        max-width: 1640px;
+        @extend .flex;
+        @extend .flex-wrap;
+        @extend .flex-v-center;
+        @extend .flex-h-end;
+
+        &.mobile {
+            display: none;
+
+            @media screen and (max-width:1024px) {
+                & {
+                    @include flex;
+                }
+            }
+        }
+
+        &.descktop {
+            @media screen and (max-width:1024px) {
+                & {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    &__nav {
+        width: auto;
+        @extend .flex;
+        @extend .flex-wrap;
+        @extend .flex-v-center;
+        @extend .flex-h-start;
+        margin-right: 100px;
+
+        &--link {
+            width: auto;
+            display: block;
+            @include font('Semplicita Pro', 20px, $COLOR_WHITE, 500, 30px);
+            transition: all .6s;
+            margin-right: 75px;
+            text-decoration: none;
+
+            padding: 5px 15px;
+            transition: all .6s;
+
+            &:last-child {
+                margin-right: 0;
+            }
+
+            &:hover {
+                color: transparentize($COLOR_WHITE, .3);
+            }
+
+            &.current {
+                background: $COLOR_WHITE;
+                color: $COLOR_GREY;
+
+                &:hover {
+                    color: $COLOR_GREY;
+                }
+            }
+
+            &.hasDropdownMenu {
+                position: relative;
+                .menuLabel {
+                    display: block;
+                    @include font('Semplicita Pro', 20px, $COLOR_WHITE, 500, 30px);
+                    text-decoration: none;
+                }
+
+                .menuDropdown {
+                    position: absolute;
+                    top: 105%;
+                    left:calc(50% - 100px);
+                    @extend .flex;
+                    @extend .flex-wrap;
+                    @extend .flex-v-start;
+                    @extend .flex-direction-column;
+                    @extend .flex-h-start;
+                    width: 100%;
+                    min-width: 200px;
+                    background: $COLOR_WHITE;
+                    opacity: 0;
+                    visibility: hidden;
+                    transition: all .6s;
+                    .link {
+                        width: 100%;
+                        @include font('Semplicita Pro', 14px, $COLOR_GREY, 400, 22px);
+                        transition: all .6s;
+                        border-bottom: 1px solid $COLOR_GREY;
+                        padding: 7px 15px;
+                        text-decoration: none;
+                        &:last-child {
+                            border-bottom: none;
+                        }
+
+                        &:hover {
+                            color: transparentize($COLOR_GREY, .5);
+                        }
+
+                        &.disabled {
+                            opacity: .3;
+                            cursor: default;
+                            &:hover {
+                                color: $COLOR_GREY;
+                            }
+                        }
+                    }
+                }
+
+                &:hover {
+                    .menuDropdown {
+                        opacity: 1;
+                        visibility: visible;
+                    }
+                }
+            }
+        }
+    }
+
+    &__langBtns {
+        width: auto;
+        @extend .flex;
+        @extend .flex-wrap;
+        @extend .flex-v-center;
+        @extend .flex-h-start;
+
+        .header__langSwitch {
+            width: auto;
+            @extend .flex;
+            @extend .flex-wrap;
+            @extend .flex-v-center;
+            @extend .flex-h-start;
+
+            &--link {
+                margin-right: 20px;
+                padding: 5px 15px;
+                display: block;
+                text-decoration: none;
+                text-transform: uppercase;
+                @include font('Semplicita Pro', 20px, $COLOR_WHITE , 500, 30px);
+                transition: all .6s;
+                
+                &:last-child {
+                    margin-right: 0;
+                }
+
+                &.current {
+                    background: $COLOR_WHITE;
+                    color: $COLOR_GREY;
+                    cursor: default;
+
+                    &:hover {
+                        color: $COLOR_GREY;
+                    }
+                }
+
+                &:hover {
+                    color: transparentize($COLOR_WHITE, .3);
+                }
+            }
+        }
+    }
+
+    &__burger {
+        width: 50px;
+        height: 30px;
+        margin-left: auto;
+        @extend .flex;
+        @extend .flex-wrap;
+        @extend .flex-v-center;
+        @extend .flex-h-center;
+        position: relative;
+        border: none;
+        background: transparent;
+        outline: none;
+
+        .line {
+            width: 100%;
+            display: block;
+            height: 3px;
+            background: $COLOR_GREY;
+            position: absolute;
+            top: 0;
+            border-radius: 25%;
+            left: 0;
+
+            &:nth-child(2) {
+                top: calc(50% - 1.5px);
+            }
+
+            &:last-child {
+                bottom: 0px;
+                top: unset;
+            }
+        }
+    }
+
+    &__socials {
+        @extend .flex;
+        @extend .flex-wrap;
+        @extend .flex-v-center;
+        @extend .flex-h-start;
+        width: 100%;
+        margin-top: 50px;
+
+        &--btn {
+            width: 25px;
+            height: 25px;
+            display: block;
+            background-image: url('./images/icon-share-toggler.svg');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            margin-right: 50px;
+            outline:  none;
+            cursor: pointer;
+            border: none;
+            background-color: transparent;
+        }
+
+        &--hidden {
+            width: calc(100% - 75px);
+            @extend .flex;
+            @extend .flex-wrap;
+            @extend .flex-v-center;
+            @extend .flex-h-end;
+            opacity: 0;
+            transition: all .6s;
+
+            .social-link {
+                margin-right: 15px;
+                @extend .flex;
+                @extend .flex-wrap;
+                @extend .flex-v-center;
+                @extend .flex-h-start;
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
+
+            &.show {
+                opacity: 1;
+            }
+        }
+    }
+
+    @media screen and (max-width:1024px) {
+        & {
+            position: relative;
+            padding: 50px 30px;
+
+            &__cont {
+                @include justify-content(flex-start);
+            }
+            
+
+            &__logo {
+                max-width: 40%;
+                display: block;
+
+                img {
+                    width: 100%;
+                }
+            }
+
+            &__line {
+                width: 100%;
+                @include flex;
+                @include flex-wrap(wrap);
+                @include align-items(center);
+                @include justify-content(flex-start);
+            }
+        }
+    }
+}

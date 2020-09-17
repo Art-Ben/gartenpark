@@ -1,0 +1,191 @@
+.footer {
+    width: 100%;
+    @extend .flex;
+    @extend .flex-wrap;
+    @extend .flex-v-start;
+    @extend .flex-h-center;
+    background: $COLOR_WHITE;
+    padding: 80px 0;
+
+    &__cont {
+        width: 100%;
+        max-width: 1000px;
+        @extend .flex;
+        @extend .flex-wrap;
+        @extend .flex-v-end;
+        @extend .flex-h-between;
+
+        @media screen and (max-width:560px) {
+            & {
+                padding: 0 35px;
+                align-items: stretch;
+            }
+        }
+    }
+
+    &__logo {
+        width: auto;
+        @extend .flex;
+        @extend .flex-wrap;
+        @extend .flex-v-end;
+        @extend .flex-h-start;
+
+        &--image {
+            width: 100%;
+            max-width: 220px;
+            display: block;
+            text-align: left;
+
+            img {
+                max-width: 100%;
+            }
+
+            @media screen and (max-width:560px) {
+                & {
+                    max-width: 85px;
+                }
+            }
+        }
+    }
+
+    &__socials,
+    &__menu {
+        width: auto;
+        @extend .flex;
+        @extend .flex-wrap;
+        @extend .flex-v-center;
+        @extend .flex-h-center;
+
+        @media screen and (max-width:560px) {
+            & {
+                width: calc(100% - 85px);
+            }
+        }
+    }
+
+    &__menu {
+
+        &_mobile {
+            display: none;
+            width: 100%;
+            @extend .flex-wrap;
+            @extend .flex-v-start;
+            @extend .flex-h-start;
+
+            .footer__nav {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+
+        @media screen and (max-width:560px) {
+            & {
+                display: none;
+            }
+
+            &_mobile {
+                display: flex;
+            }
+        }
+    }
+
+    &__socials {
+        .social-link {
+            display: block;
+            margin-right: 25px;
+            transition: all .6s;
+            &:last-child {
+                margin-right: 0;
+            }
+
+            &:hover {
+                opacity:.5;
+            }
+
+            @media screen and (max-width:560px) {
+                & {
+                    max-width: 15px;
+                    img {
+                        width: 100%;
+                    } 
+                }
+            }
+        }
+
+        @media screen and (max-width:560px) {
+            & {
+                margin-left: auto;
+                display: none;
+                &_mobile {
+                    display: flex;
+                    width: 100%;
+                    justify-content: space-between;
+                    .social-link {
+                        display: block;
+                        margin-right: 25px;
+                        transition: all .6s;
+                        &:last-child {
+                            margin-right: 0;
+                        }
+            
+                        &:hover {
+                            opacity:.5;
+                        }
+            
+                        @media screen and (max-width:560px) {
+                            & {
+                                max-width: 15px;
+                                img {
+                                    width: 100%;
+                                } 
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &__nav {
+        width: auto;
+        @extend .flex;
+        @extend .flex-wrap;
+        @extend .flex-v-start;
+        @extend .flex-h-end;
+        &--link {
+            display: block;
+            text-decoration: none;
+            @include font('Semplicita Pro', 20px, $COLOR_GREY, 400, 30px);
+            transition: all .6s;
+            margin-right:  30px;
+
+            &:last-child {
+                margin-right: 0;
+            }
+
+            &:hover {
+                color: transparentize($COLOR_GREY, .7);
+            }
+
+            @media screen and (max-width:560px) {
+                font-size: 12px;
+                line-height: 20px;
+            }
+        }
+    }
+
+    &_mobile_cont {
+        display: none;
+        @extend .flex-wrap;
+        @extend .flex-v-start;
+        @extend .flex-h-between;
+        @extend .flex-direction-column;
+        width: calc(100% - 85px);
+        padding-left: 40px;
+
+        @media screen and (max-width:560px) {
+            @include flex;
+        }
+    }
+
+}

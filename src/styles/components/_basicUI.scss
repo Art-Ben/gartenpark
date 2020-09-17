@@ -1,0 +1,2438 @@
+/*
+    Стили для базовых, общих, повторяющихся элементов
+*/
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+.flex {
+    @include flex;
+
+    &-wrap {
+        @include flex-wrap(wrap);
+    }
+
+    &-v-start {
+        @include align-items(flex-start);
+    }
+
+    &-v-center {
+        @include align-items(center);
+    }
+
+    &-v-end {
+        @include align-items(flex-end);
+    }
+
+    &-h-start {
+        @include justify-content(flex-start);
+    }
+
+    &-h-center {
+        @include justify-content(center);
+    }
+
+    &-h-end {
+        @include justify-content(flex-end);
+    }
+
+    &-direction-row {
+        @include flex-direction(row);
+    }
+
+    &-direction-column {
+        @include flex-direction(column);
+    }
+
+    &-h-between {
+        @include justify-content(space-between);
+    }
+
+    &-v-stretch {
+        @include align-items(stretch);
+    }
+
+    &-c-start {
+        @include align-content(flex-start);
+    }
+
+    &-c-center {
+        @include align-content(center);
+    }
+
+    &-c-end {
+        @include align-content(flex-end);
+    }
+}
+
+.page__nav {
+    width: auto;
+    @extend .flex;
+    @extend .flex-wrap;
+    @extend .flex-v-center;
+    @extend .flex-h-start;
+    margin-right: 100px;
+
+    &--link {
+        display: block;
+        @include font('Semplicita Pro', 20px, $COLOR_WHITE, 400, 30px);
+        margin-right: 100px;
+        text-decoration: none;
+        padding: 5px 15px;
+        transition: all .6s;
+
+        &:last-child {
+            margin-right: 0;
+        }
+
+        &:hover {
+            color: transparentize($COLOR_WHITE, .3);
+        }
+
+        &.current {
+            background: $COLOR_WHITE;
+            color: $COLOR_GREY;
+
+            &:hover {
+                color: $COLOR_GREY;
+            }
+        }
+
+
+    }
+}
+
+.page__intro {
+    width: 100%;
+    @extend .flex;
+    @extend .flex-wrap;
+    @extend .flex-v-start;
+    @extend .flex-h-center;
+    position: relative;
+
+    &--menu {
+        position: absolute;
+        background: transparent;
+        width: 100%;
+        padding: 45px 150px;
+        z-index: 2;
+        @extend .flex;
+        @extend .flex-wrap;
+        @extend .flex-v-start;
+        @extend .flex-h-end;
+    }
+
+    &--menu_langs {
+        width: auto;
+        @extend .flex;
+        @extend .flex-wrap;
+        @extend .flex-v-center;
+        @extend .flex-h-start;
+
+
+        .page__langSwitch {
+            width: auto;
+            @extend .flex;
+            @extend .flex-wrap;
+            @extend .flex-v-center;
+            @extend .flex-h-start;
+
+            &--link {
+                margin-right: 20px;
+                padding: 5px 15px;
+                display: block;
+                text-decoration: none;
+                text-transform: uppercase;
+                @include font('Semplicita Pro', 20px, $COLOR_WHITE, 500, 30px);
+                transition: all .6s;
+
+                &:last-child {
+                    margin-right: 0;
+                }
+
+                &.current {
+                    background: $COLOR_WHITE;
+                    color: $COLOR_GREY;
+                    cursor: default;
+
+                    &:hover {
+                        color: $COLOR_GREY;
+                    }
+                }
+
+                &:hover {
+                    color: transparentize($COLOR_WHITE, .3);
+                }
+            }
+        }
+    }
+
+    &--slider {
+        position: relative;
+        width: 100%;
+
+        &_slide {
+            width: 100%;
+            position: relative;
+            min-height: 860px;
+            min-height: calc(var(--vh, 1vh) * 65);
+            margin-right: 50px;
+        }
+
+        &_nav {
+            position: absolute;
+            left: 200px;
+            top: 350px;
+            @extend .flex;
+            @extend .flex-wrap;
+            @extend .flex-v-center;
+            @extend .flex-h-between;
+            width: 140px;
+            padding: 0 15px;
+
+            .arrow {
+                outline: none;
+                border: none;
+                background: transparent;
+                display: block;
+                width: 35px;
+                height: 20px;
+                background-position: center center;
+                background-size: cover;
+                background-repeat: no-repeat;
+                cursor: pointer;
+                transition: all .6s;
+
+                &.prev {
+                    background-image: url('./images/icon-slider-prev.svg');
+                }
+
+                &.next {
+                    background-image: url('./images/icon-slider-next.svg');
+                }
+
+                &:hover {
+                    transform: scale(1.25);
+                }
+            }
+        }
+    }
+
+    &--aside {
+        @extend .flex;
+        @extend .flex-wrap;
+        @extend .flex-v-start;
+        @extend .flex-h-start;
+        @extend .flex-direction-column;
+        height: auto;
+        width: 200px;
+        padding-top: 340px;
+        background: $COLOR_WHITE;
+        padding-left: 70px;
+
+        .line {
+            width: 2px;
+            height: 60px;
+            background: $COLOR_GREY;
+            margin-bottom: 25px;
+            display: none;
+        }
+
+        @media screen and (max-width:1400px) {
+            padding-top: 275px;
+        }
+
+        @media screen and (max-width:1024px) {
+            & {
+                display: none;
+            }
+        }
+    }
+
+    &--centr {
+        @extend .flex;
+        @extend .flex-wrap;
+        @extend .flex-v-center;
+        @extend .flex-h-center;
+        width: calc(100% - 200px);
+        min-height: 860px;
+        min-height: calc(var(--vh, 1vh) * 65);
+        position: relative;
+
+        @media screen and (max-width:1024px) {
+            & {
+                width: 100%;
+                min-height: 500px;
+            }
+        }
+
+        @media screen and (max-width:560px) {
+            & {
+                min-height: 300px;
+            }
+        }
+    }
+
+    &--item {
+        width: 100%;
+        min-height: 860px;
+        min-height: calc(var(--vh, 1vh) * 65);
+
+        @media screen and (max-width:1024px) {
+            & {
+                min-height: 300px;
+            }
+        }
+
+        @media screen and (max-width:560px) {
+            & {
+                width: 100%;
+                min-height: 300px;
+            }
+        }
+    }
+
+
+
+    &--logo {
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 5;
+        @extend .flex;
+        @extend .flex-wrap;
+        @extend .flex-v-center;
+        @extend .flex-h-center;
+        width: 340px;
+        height: 340px;
+        background: $COLOR_WHITE;
+
+        img {
+            height: 225px;
+            width: 225px;
+        }
+
+        &_link {
+            text-decoration: none;
+            display: block;
+            width: auto;
+        }
+
+        @media screen and (max-width:1400px) {
+            width: 275px;
+            height: 275px;
+            margin-left: 30px;
+
+            img {
+                width: 200px;
+                height: 200px;
+            }
+        }
+
+        @media screen and (max-width:1024px) {
+            & {
+                display: none;
+            }
+        }
+    }
+
+    &_poster {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-position: center center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        @extend .flex;
+        @extend .flex-wrap;
+        @extend .flex-v-center;
+        @extend .flex-h-center;
+
+        @media screen and (max-width:1024px) {
+            & {
+                position: relative;
+            }
+        }
+    }
+
+    &_banner {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-position: center center;
+        background-size: cover;
+        background-repeat: no-repeat;
+
+        @media screen and (max-width:1024px) {
+            & {
+                position: relative;
+            }
+        }
+
+        @media screen and (max-width:1024px) {
+            min-height: 300px;
+        }
+    }
+
+    .icon-play {
+        display: block;
+        position: absolute;
+        z-index: 5;
+        width: 90px;
+        height: 80px;
+        top: calc(50% - 40px);
+        left: calc(50% - 45px);
+        background-image: url('./images/icon-play-video.svg');
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center center;
+        transition: all .6s;
+        outline: none;
+        border: none;
+        background-color: transparent;
+
+        &:hover {
+            transform: scale(1.25);
+        }
+
+        &.paused {
+            background-image: url('./images/icon-pause.svg');
+        }
+
+        &.hidden {
+            opacity: 0;
+        }
+    }
+
+    .mejs__overlay:hover>.mejs__overlay-button,
+    .mejs__overlay-button {
+        background-image: url('./images/icon-play-video.svg');
+        background-position: unset;
+        width: 90px;
+        height: 80px;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center center;
+        outline: none;
+        border: none;
+        background-color: transparent;
+    }
+
+    &-socials {
+        width: 20px;
+        @extend .flex;
+        @extend .flex-wrap;
+        @extend .flex-v-start;
+        @extend .flex-h-center;
+        @extend .flex-direction-column;
+        margin-left: -8px;
+
+        .social-link {
+            display: block;
+            width: 20px;
+            height: auto;
+            margin-bottom: 25px;
+            transition: all .6s;
+
+            img {
+                width: 100%;
+            }
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            &:hover {
+                opacity: 0.5;
+            }
+        }
+    }
+}
+
+.basicTextTwoColumns {
+    width: 100%;
+    @extend .flex;
+    @extend .flex-wrap;
+    @extend .flex-v-start;
+    @extend .flex-v-center;
+
+
+    &__top {
+        width: 100%;
+        @extend .flex;
+        @extend .flex-wrap;
+        @extend .flex-v-start;
+        @extend .flex-h-between;
+        background: #FBFBFB;
+        padding: 100px 190px 100px 190px;
+        position: relative;
+        z-index: 1;
+
+        .tit {
+            width: 100%;
+            text-align: left;
+            @include font('Semplicita Pro', 25px, $COLOR_GREY, 500, 30px);
+            margin-bottom: 20px;
+
+            @media screen and (max-width:560px) {
+                & {
+                    text-align: center;
+                    font-size: 10px;
+                    line-height: 14px;
+                }
+            }
+        }
+
+        .desc {
+            width: 100%;
+            text-align: left;
+            @include font('Semplicita Pro', 18px, $COLOR_GREY, 400, 26px);
+
+            @media screen and (max-width:560px) {
+                & {
+                    text-align: center;
+                    font-size: 10px;
+                    line-height: 14px;
+                }
+            }
+        }
+
+        &.with-image {
+            padding-bottom: 300px;
+        }
+
+        @media screen and (max-width:1600px) {
+            padding: 85px 65px;
+        }
+
+        @media screen and (max-width:560px) {
+            & {
+                padding: 25px 35px 100px 35px;
+
+                &.with-image {
+                    padding-bottom: 100px;
+                }
+            }
+        }
+
+        @media screen and (min-width:1921px) {
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+    }
+
+    &__column {
+        width: 100%;
+        max-width: 650px;
+        @extend .flex;
+        @extend .flex-wrap;
+        @extend .flex-v-start;
+        @extend .flex-h-start;
+        padding: 0 35px;
+
+        @media screen and (max-width:1700px) {
+            max-width: 50%;
+        }
+
+        @media screen and (max-width:1024px) {
+            max-width: 100%;
+            padding: 0 15px;
+            margin-bottom: 40px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    &__bottom {
+        width: 100%;
+        @extend .flex;
+        @extend .flex-wrap;
+        @extend .flex-v-start;
+        @extend .flex-h-center;
+        margin-top: -200px;
+        position: relative;
+        z-index: 2;
+
+        .thumb {
+            max-width: 1250px;
+
+            @media screen and (max-width:1250px) {
+                max-width: 100%;
+            }
+        }
+
+        @media screen and (max-width:560px) {
+            & {
+                margin-top: -50px;
+                padding-left: 25px;
+                padding-right: 25px;
+
+                .thumb {
+                    max-width: 100%;
+                }
+            }
+        }
+    }
+
+    &.spec_margin {
+        .basicTextTwoColumns__top {
+            padding: 100px 190px 0px 190px;
+
+            @media screen and (max-width:1600px) {
+                padding: 85px 65px;
+            }
+
+            @media screen and (max-width:560px) {
+                & {
+                    padding: 25px 35px 25px 35px;
+
+                    &.with-image {
+                        padding-bottom: 50px;
+                    }
+                }
+            }
+        }
+
+    }
+}
+
+.customCtaForm {
+    width: 100%;
+    @extend .flex;
+    @extend .flex-wrap;
+    @extend .flex-v-start;
+    @extend .flex-h-center;
+    padding: 100px 0 50px 0;
+    position: relative;
+    background-image: url('./images/cta-form-bg.jpg');
+    background-size: 100% 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    transition: all .6s;
+    min-height: 385px;
+
+    /*&:after {
+        display: block;
+        position: absolute;
+        content: '';
+        width: 684px;
+        height: 684px;
+        background-image: url('./images/cta-form-logo.svg');
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        top: calc(50% - 342px);
+        left: calc(50% - 342px);
+
+        @media screen and (max-width:560px) {
+            height: 500px;
+            width: 500px;
+            top: calc(50% - 250px);
+            left: unset;
+        }
+
+        @media screen and (max-width:450px) {
+            height: 350px;
+            width: 350px;
+            top: calc(50% - 175px);
+            left: unset;
+        }
+
+        @media screen and (max-width:360px) {
+            height: 300px;
+            width: 300px;
+            top: calc(50% - 150px);
+            left: unset;
+        }
+    }*/
+
+    &__cont {
+        width: 100%;
+        @extend .flex;
+        @extend .flex-wrap;
+        @extend .flex-v-start;
+        @extend .flex-h-between;
+        max-width: 1250px;
+        position: relative;
+        z-index: 2;
+        transition: all .6s;
+
+        @media screen and (max-width: 560px) {
+            padding: 0 15px;
+        }
+    }
+
+    &__info {
+        width: auto;
+        @extend .flex;
+        @extend .flex-wrap;
+        @extend .flex-v-start;
+        @extend .flex-h-start;
+        @extend .flex-direction-column;
+
+        .infLink {
+            @extend .flex;
+            @extend .flex-wrap;
+            @extend .flex-v-center;
+            @extend .flex-h-start;
+            width: auto;
+            display: block;
+            @include font('Semplicita Pro', 15px, $COLOR_WHITE, 400, 25px);
+            margin-bottom: 20px;
+            transition: all .6s;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            &:before {
+                content: '';
+                display: block;
+                margin-right: 10px;
+                float: left;
+            }
+
+            &.infTel {
+                &:before {
+                    content: url(./images/icon-call-white.svg);
+                }
+
+            }
+
+            &.infMail {
+
+                &:before {
+                    content: url(./images/icon-mail-white.svg);
+                }
+
+            }
+
+
+            &:hover {
+                opacity: .5;
+            }
+        }
+
+        @media screen and (max-width:560px) {
+            & {
+                width: 100%;
+                margin-bottom: 30px;
+                @include flex;
+                @include flex-wrap(wrap);
+                @include align-items(center);
+                @include justify-content(center);
+                @include flex-direction(row);
+
+                .infLink {
+                    width: 33.33%;
+                    font-size: 8px;
+                    line-height: 16px;
+                    margin-bottom: 0;
+                    @include flex;
+                    @include flex-wrap(wrap);
+                    @include align-items(center);
+                    @include justify-content(center);
+                }
+            }
+        }
+
+        @media screen and (max-width:380px) {
+            & {
+                .infLink {
+                    width: 50%;
+                    margin: 10px 0;
+                    text-align: center;
+                    font-size: 12px;
+                    line-height: 20px;
+                }
+            }
+        }
+
+        @media screen and (max-width:320px) {
+            & {
+                .infLink {
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    &__instence {
+        width: 100%;
+        max-width: 900px;
+        @extend .flex;
+        @extend .flex-wrap;
+        @extend .flex-v-start;
+        @extend .flex-h-start;
+        position: relative;
+    }
+
+    &__form {
+        width: 100%;
+        max-width: 900px;
+        @extend .flex;
+        @extend .flex-wrap;
+        @extend .flex-v-start;
+        @extend .flex-h-start;
+
+        .formGroup {
+            width: 100%;
+            max-width: calc(33.333% - 20px);
+
+            &.full {
+                max-width: 100%;
+                @extend .flex;
+                @extend .flex-wrap;
+                @extend .flex-v-start;
+                @extend .flex-h-end;
+                margin-top: 35px;
+            }
+
+            &.stretch {
+                align-self: stretch;
+            }
+
+            &.special {
+                margin-top: 0;
+            }
+
+            @media screen and (max-width:560px) {
+                max-width: 50%;
+            }
+
+            @media screen and (max-width:380px) {
+                max-width: 100%;
+            }
+        }
+
+        .cont {
+            width: 100%;
+            max-width: calc(66.6666%);
+            margin-right: 20px;
+            @extend .flex;
+            @extend .flex-wrap;
+            @extend .flex-v-start;
+            @extend .flex-h-between;
+
+            .formGroup {
+                max-width: calc(50% - 10px);
+
+                &:nth-child(2),
+                &:first-child {
+                    margin-bottom: 20px;
+                }
+
+                @media screen and (max-width:560px) {
+                    & {
+                        max-width: 100%;
+                        margin-bottom: 20px;
+                    }
+                }
+
+                @media screen and (min-width:380px) and (max-width:560px) {
+                    &.selectgrp {
+                        margin-bottom: 0;
+                    }
+                }
+
+                &.spec-between {
+                    @extend .flex;
+                    @extend .flex-wrap;
+                    @extend .flex-v-center;
+                    @extend .flex-h-between;
+                    justify-content: space-between;
+                }
+            }
+
+            @media screen and (max-width:560px) {
+                max-width: calc(50% - 20px);
+            }
+
+            @media screen and (max-width:380px) {
+                max-width: 100%;
+                margin-right: 0;
+            }
+        }
+
+        .my-inpt {
+            height: 60px;
+            width: 100%;
+            background: $COLOR_WHITE;
+            border-radius: 10px;
+            padding: 20px 35px;
+            @include font('Semplicita Pro', 12px, $COLOR_GREY, 400, 20px);
+            outline: none;
+            border: none;
+            transition: all .6s;
+
+            &:focus {
+                box-shadow: 0 0 20px rgba(0, 0, 0, .8);
+            }
+
+            &.error {
+                color: $COLOR_GREY;
+
+                @include placeholder {
+                    color: #ff5b5b;
+                }
+            }
+
+            &#email {
+                &.error {
+                    color: #ff5b5b;
+                }
+            }
+
+            &.spec-w-half {
+                width:calc(50% - 10px);
+
+                @media screen and (max-width:560px) {
+                    width: 100%;
+                    &:first-child {
+                        margin-bottom: 20px;
+                    }
+                }                
+            }
+        }
+
+        .my-checkbox-grp {
+            @extend .flex;
+            @extend .flex-wrap;
+            @extend .flex-v-center;
+            @extend .flex-h-start;
+            width: 50%;
+
+            &_cont {
+                @extend .flex;
+                @extend .flex-wrap;
+                @extend .flex-v-center;
+                @extend .flex-h-start;
+                width: 100%;
+                background: transparent;
+                @include font('Semplicita Pro', 14px, $COLOR_WHITE, 400, 22px);
+                position: relative;
+                padding-left: 35px;
+                margin-bottom: 15px;
+                cursor: pointer;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+
+                &.error {
+                    .my-checkbox-grp_checkmark {
+                        background-color: #ff5b5b;
+                    }
+                }
+            }
+
+            
+
+            .link {
+                color: $COLOR_WHITE;
+                font-weight: 700;
+                display: inline-block;
+                margin: 0 5px;
+                text-decoration: none;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+
+            &_inpt {
+                display: none;
+            }
+
+            &_checkmark {
+                display: block;
+                width: 20px;
+                height: 20px;
+                border: 1px solid $COLOR_GREY;
+                position: absolute;
+                left: 0;
+                top: calc(50% - 10px);
+                transition: all .6s;
+                border-radius: 3px;
+                background-color: $COLOR_WHITE;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: 12px 14px;
+            }
+
+            &_inpt {
+                &:checked {
+                    &~.my-checkbox-grp_checkmark {
+                        background-color: $COLOR_GREY;
+                        background-image: url('./images/icon-selected.svg');
+                    }
+                }
+            }
+
+            @media screen and (max-width:560px) {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+        }
+
+        .my-txt {
+            height: 60px;
+            width: 100%;
+            background: $COLOR_WHITE;
+            border-radius: 10px;
+            padding: 20px 35px;
+            @include font('Semplicita Pro', 12px, $COLOR_GREY, 400, 20px);
+            outline: none;
+            border: none;
+            resize: none;
+            height: 100%;
+            position: relative;
+            transition: all .6s;
+
+            &:focus {
+                box-shadow: 0 0 20px rgba(0, 0, 0, .8);
+            }
+
+            &.error {
+                color: $COLOR_GREY;
+                
+                @include placeholder {
+                    color: #ff5b5b;
+                }
+            }
+        }
+
+        .my-sbm {
+            width: auto;
+            padding: 10px 30px;
+            background: $COLOR_WHITE;
+            transition: all .6s;
+            border-radius: 10px;
+            margin-left: auto;
+            outline: none;
+            border: none;
+            box-shadow: none;
+            cursor: pointer;
+
+            @include font('Semplicita Pro', 13px, $COLOR_GREY, 400, 20px);
+
+            &:hover {
+                background: $COLOR_GREY;
+                color: $COLOR_WHITE;
+            }
+        }
+
+        .my-select {
+
+            &.error {
+
+                &~.select2 {
+                    .my-select-cont {
+                        color: #ff5b5b;
+
+                        .select2-selection__rendered {
+                            color: #ff5b5b;
+                        }
+                    }
+
+                }
+
+            }
+        }
+
+        .my-select-cont {
+            width: 100% !important;
+            background: $COLOR_WHITE;
+            border-radius: 10px;
+            padding: 0 35px;
+            @include font('Semplicita Pro', 12px, $COLOR_GREY, 400, 20px);
+            outline: none;
+            border: none;
+            resize: none;
+            height: 60px !important;
+            height: 100%;
+            position: relative;
+            transition: all .6s;
+            @extend .flex;
+            @extend .flex-wrap;
+            @extend .flex-v-center;
+
+            .select2-selection__rendered {
+                padding: 0!important;
+            }
+
+            .select2-selection__arrow {
+                top: unset;
+                right: 15px;
+                width: 17px;
+                height: 10px;
+                background-position: center center;
+                background-size: 90% 90%;
+                background-repeat: no-repeat;
+                background-image: url(./images/icon-arrow-select-down.svg);
+
+                b {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    .my-select-drop {
+        border: none;
+
+        .select2-results__option {
+            @include font('Semplicita Pro', 12px, $COLOR_GREY, 400, 20px);
+            border-bottom: 1px solid transparentize($COLOR_GREY, .5);
+
+            &:first-child {
+                display: none;
+            }
+
+            &:last-child {
+                border-bottom: none;
+            }
+
+            &--highlighted {
+                background-color: transparentize($COLOR_GREY, .7);
+            }
+        }
+
+        
+
+        &.select2-dropdown--above {
+            box-shadow: 0 -5px 10px rgba(0, 0, 0, .8);
+        }
+
+        &.select2-dropdown--below {
+            box-shadow: 0 5px 10px rgba(0, 0, 0, .8);
+        }
+    }
+
+    @media screen and (max-width:560px) {
+        & {
+            background-image: url('./images/contact-form-mobile.png');
+        }
+    }
+
+    .afterSubmitBlock {
+        width: 100%;
+        display: none;
+        padding: 5px;
+        background: $COLOR_WHITE;
+        border-radius: 10px;
+        @include font('Semplicita Pro', 12px, $COLOR_GREY, 400, 20px);
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        &.errors {
+            color: #e94015;
+
+            .er {
+                width: 100%;
+                margin-bottom: 10px;
+                color: inherit;
+            }
+        }
+
+        &.success {
+            color: $COLOR_GREY;
+            background: $COLOR_WHITE;
+            font-size: 16px;
+            line-height: 24px;
+            text-align: left;
+        }
+    }
+}
+
+.select2-container {
+    width: 100% !important;
+}
+
+.mobileMenu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
+    transition: all .6s;
+    padding: 50px 30px;
+    background: $COLOR_WHITE;
+    z-index: 1001;
+
+    &__line {
+        @extend .flex;
+        @extend .flex-wrap;
+        @extend .flex-v-start;
+        @extend .flex-h-start;
+        width: 100%;
+        margin-bottom: 30px;
+
+        &.close-line {
+            @extend .flex;
+            @extend .flex-wrap;
+            @extend .flex-v-center;
+            @extend .flex-h-start;
+            width: 100%;
+        }
+
+        .mobileMenu__logo--image {
+            width: 100%;
+            max-width: 40%;
+
+            img {
+                width: 100%;
+            }
+        }
+    }
+
+    &__close {
+        width: 50px;
+        height: 30px;
+        margin-left: auto;
+        @extend .flex;
+        @extend .flex-wrap;
+        @extend .flex-v-center;
+        @extend .flex-h-center;
+        position: relative;
+        border: none;
+        background: transparent;
+        outline: none;
+
+        .line {
+            width: 100%;
+            display: block;
+            height: 3px;
+            background: $COLOR_GREY;
+            position: absolute;
+            top: calc(50% - 1.5px);
+            border-radius: 25%;
+            left: 0;
+            transform-origin: center center;
+
+            &:first-child {
+                transform: rotate(45deg);
+            }
+
+            &:last-child {
+                transform: rotate(-45deg);
+            }
+        }
+    }
+
+    &__list {
+        width: 100%;
+        @extend .flex;
+        @extend .flex-wrap;
+        @extend .flex-v-start;
+        @extend .flex-h-start;
+    }
+
+    &__langSwitch {
+        width: 100%;
+        @extend .flex;
+        @extend .flex-wrap;
+        @extend .flex-v-center;
+        @extend .flex-h-center;
+        margin-bottom: 50px;
+
+        &--link {
+            margin-right: 25px;
+            display: block;
+            @include font('Semplicita Pro', 14px, $COLOR_GREY, 400, 22px);
+            text-decoration: none;
+            text-transform: uppercase;
+            padding: 5px 15px;
+
+            &:last-child {
+                margin-right: 0;
+            }
+
+            &.current {
+                font-weight: 600;
+                color: $COLOR_WHITE;
+                background: $COLOR_GREY;
+            }
+        }
+    }
+
+    &__nav {
+        width: 100%;
+        @extend .flex;
+        @extend .flex-wrap;
+        @extend .flex-v-start;
+        @extend .flex-h-start;
+        @extend .flex-direction-column;
+
+        &--link {
+            @include font('Semplicita Pro', 16px, $COLOR_GREY, 400, 24px);
+            display: block;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            text-decoration: none;
+
+            &.current {
+                font-weight: 600;
+                color: $COLOR_BLACK;
+                padding-left: 25px;
+                border-left: 3px solid $COLOR_GREY;
+            }
+
+            &.hasDropdownMenu {
+                position: relative;
+
+                .menuLabel {
+                    display: block;
+                    @include font('Semplicita Pro', 16px, $COLOR_GREY, 400, 24px);
+                    text-decoration: none;
+
+                    &:after {
+                        content: '';
+                        display: block;
+                    }
+                }
+
+                .menuDropdown {
+                    position: absolute;
+                    top: 105%;
+                    left: calc(50% - 100px);
+                    @extend .flex;
+                    @extend .flex-wrap;
+                    @extend .flex-v-start;
+                    @extend .flex-direction-column;
+                    @extend .flex-h-start;
+                    display: none;
+                    width: 100%;
+                    min-width: 200px;
+                    background: $COLOR_WHITE;
+                    opacity: 0;
+                    visibility: hidden;
+                    transition: all .6s;
+
+                    .link {
+                        width: 100%;
+                        @include font('Semplicita Pro', 14px, $COLOR_GREY, 400, 22px);
+                        transition: all .6s;
+                        border-bottom: 1px solid $COLOR_GREY;
+                        padding: 7px 15px;
+                        text-decoration: none;
+
+                        &:last-child {
+                            border-bottom: none;
+                        }
+
+                        &:hover {
+                            color: transparentize($COLOR_GREY, .5);
+                        }
+
+                        &.disabled {
+                            opacity: .3;
+                            cursor: default;
+
+                            &:hover {
+                                color: $COLOR_GREY;
+                            }
+                        }
+                    }
+                }
+
+                &:hover {}
+            }
+        }
+    }
+
+    &.open {
+        right: 0;
+    }
+}
+
+.img-full-height {
+    height: 100%;
+    width: 100%;
+
+    img {
+        height: 100%;
+        width: 100%;
+    }
+}
+
+.myBreadCrumbsList {
+    width: 100%;
+    @extend .flex;
+    @extend .flex-wrap;
+    @extend .flex-v-center;
+    @extend .flex-h-end;
+    margin: 25px 0;
+
+    &__items {
+        width: 100%;
+        @extend .flex;
+        @extend .flex-wrap;
+        @extend .flex-v-center;
+        @extend .flex-h-start;
+        max-width: calc(100% - 200px);
+
+        &--item {
+            @extend .flex;
+            @extend .flex-wrap;
+            @extend .flex-v-center;
+            @extend .flex-h-start;
+            width: auto;
+            @include font('SemplicitaPro', 15px, $COLOR_GREY, 400, 21px);
+
+            a,
+            span {
+                @extend .flex;
+                @extend .flex-wrap;
+                @extend .flex-v-center;
+                @extend .flex-h-start;
+                color: $COLOR_GREY;
+                font: inherit;
+            }
+
+            a {
+                transition: all .6s;
+
+                &:hover {
+                    opacity: 0.5;
+                }
+            }
+
+            .homePageElem {
+                @extend .flex;
+                @extend .flex-wrap;
+                @extend .flex-v-center;
+                @extend .flex-h-start;
+
+                &:before {
+                    content: '';
+                    display: block;
+                    width: 20px;
+                    height: 18px;
+                    background-image: url('./images/icon-breadcrumbs-home.svg');
+                    background-position: center center;
+                    background-size: cover;
+                    margin-right: 10px;
+                    margin-top: -5px;
+                    float: left;
+                    background-repeat: no-repeat;
+                }
+
+            }
+
+            .separator-image {
+                width: 10px;
+                height: 20px;
+                background-image: url('./images/icon-breadcrumbs-separator.svg');
+                background-position: center center;
+                background-size: 90% 90%;
+                background-repeat: no-repeat;
+                margin: 0 5px;
+            }
+
+            .separatorCont {
+                @extend .flex;
+                @extend .flex-wrap;
+                @extend .flex-v-center;
+                @extend .flex-h-start;
+                margin: 0 5px;
+            }
+        }
+
+        @media screen and (max-width:1024px) {
+            & {
+                max-width: calc(100% - 70px);
+                margin: 0 auto;
+                @include justify-content(flex-start);
+            }
+        }
+    }
+
+    @media screen and (max-width:560px) {
+        & {
+            @include justify-content(center);
+        }
+    }
+}
+
+.my-width {
+    width: calc(100% - 200px) !important;
+
+    @media screen and (max-width: 1024px) {
+        width: 100% !important;
+        padding: 0 15px;
+    }
+}
+
+.margin-width-fix {
+    margin-left: auto;
+}
+
+.myPostsBlock {
+    width: 100%;
+    @extend .flex;
+    @extend .flex-wrap;
+    @extend .flex-v-start;
+    @extend .flex-h-start;
+    max-width: 1400px;
+
+    .mySpecialPostBlock {
+        width: 100%;
+        position: relative;
+        @extend .flex;
+        @extend .flex-wrap;
+        @extend .flex-v-stretch;
+        @extend .flex-h-start;
+        margin-bottom: 90px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        &__aside {
+            width: 30px;
+            @extend .flex;
+            @extend .flex-wrap;
+            @extend .flex-v-start;
+            @extend .flex-h-start;
+            position: relative;
+
+            .icon {
+                width: 30px;
+                height: 27px;
+                background-color: $COLOR_WHITE;
+                background-position: center bottom;
+                background-repeat: no-repeat;
+                background-size: contain;
+                background-image: url('./images/icon-post.svg');
+                padding-top: 90px;
+                position: relative;
+                z-index: 2;
+
+                &:after {
+                    content: '';
+                    width: 100%;
+                    background: $COLOR_WHITE;
+                    z-index: 2;
+                    position: relative;
+                    height: 40px;
+                    display: block;
+                }
+            }
+
+            &:after {
+                width: 1px;
+                content: '';
+                display: block;
+                background: $COLOR_GREY;
+                position: absolute;
+                top: 0px;
+                left: calc(50% - 1px);
+                height: 100%;
+                z-index: 1;
+            }
+
+            @media screen and (max-width: 560px) {
+                & {
+                    display: none;
+                }
+            }
+        }
+
+        &__primary {
+            width: calc(100% - 200px);
+            @extend .flex;
+            @extend .flex-wrap;
+            @extend .flex-v-start;
+            @extend .flex-h-start;
+            padding-bottom: 75px;
+            padding-left: 60px;
+
+            .title {
+                width: 100%;
+                text-align: left;
+                @include font('Semplicita Pro', 25px, $COLOR_GREY, 500, 33px);
+                position: relative;
+                padding-bottom: 10px;
+                margin-bottom: 20px;
+
+                &:after {
+                    position: absolute;
+                    content: '';
+                    display: block;
+                    width: 100%;
+                    max-width: 700px;
+                    height: 6px;
+                    background: $COLOR_GREY;
+                    bottom: 0px;
+                }
+            }
+
+            .date {
+                width: 100%;
+                text-align: left;
+                @include font('Semplicita Pro', 18px, $COLOR_GREY, 400, 24px);
+                margin-bottom: 70px;
+            }
+
+            .thumb {
+                width: 100%;
+                margin-bottom: 80px;
+
+                img {
+                    width: 100%;
+                    height: auto;
+                }
+            }
+
+            .postContent {
+                width: 100%;
+                position: relative;
+                @include font('Semplicita Pro', 18px, $COLOR_GREY, 400, 24px);
+
+                &__short {
+                    width: 100%;
+                }
+
+                &__full {
+                    width: 100%;
+                    display: none;
+                }
+
+                p {
+                    width: 100%;
+                    margin-bottom: 15px;
+                }
+
+                ul,
+                ol {
+                    width: 100%;
+                    margin-bottom: 15px;
+                }
+
+                h1,
+                h2,
+                h3,
+                h4,
+                h5,
+                h5,
+                h6 {
+                    width: 100%;
+                    display: block;
+                    font: inherit;
+                    margin-bottom: 25px;
+                }
+
+                h2 {
+                    font-size: 32px;
+                    line-height: 40px;
+                }
+
+                h3 {
+                    font-size: 28px;
+                    line-height: 36px;
+                }
+
+                h4 {
+                    font-size: 24px;
+                    line-height: 32px;
+                }
+
+                h5,
+                h6 {
+                    font-size: 20px;
+                    line-height: 28px;
+                }
+
+                ul {
+                    @extend .flex;
+                    @extend .flex-wrap;
+                    @extend .flex-v-start;
+                    @extend .flex-h-start;
+
+                    li {
+                        width: 100%;
+                        margin-bottom: 15px;
+                        position: relative;
+                        padding-left: 30px;
+                        font: inherit;
+
+                        &:before {
+                            content: '';
+                            display: block;
+                            width: 10px;
+                            height: 10px;
+                            background: $COLOR_GREY;
+                            top: 5px;
+                            left: 0;
+                        }
+                    }
+                }
+
+                ol {}
+            }
+
+            .postMoreLine {
+                width: 100%;
+                margin-top: 75px;
+                @extend .flex;
+                @extend .flex-wrap;
+                @extend .flex-v-start;
+                @extend .flex-h-start;
+
+                .postMore {
+                    border: none;
+                    outline: none;
+                    background: $COLOR_WHITE;
+                    @include font('Semplicita Pro', 25px, $COLOR_GREY, 500, 35px);
+                    display: block;
+                    position: relative;
+                    padding-bottom: 10px;
+                    width: auto;
+                    cursor: pointer;
+                    transition: all .6s;
+                    z-index: 1;
+                    padding: 3px;
+
+                    .more,
+                    .less {
+                        font: inherit;
+                        color: $COLOR_GREY;
+                        transition: all .6s;
+                    }
+
+                    .more {
+                        opacity: 1;
+                        visibility: visible;
+                    }
+
+                    .less {
+                        opacity: 0;
+                        visibility: hidden;
+                        display: none;
+                    }
+
+                    &:after {
+                        content: '';
+                        position: absolute;
+                        bottom: 0px;
+                        left: 0px;
+                        display: block;
+                        transition: all .6s;
+                        height: 6px;
+                        background: #B5B5B5;
+                        width: 100%;
+                        max-width: 62.5%;
+                        z-index: -1;
+                    }
+
+                    &:hover {
+                        color: $COLOR_WHITE;
+                        padding: 3px;
+
+                        .less,
+                        .more {
+                            color: $COLOR_WHITE;
+                        }
+
+                        &:after {
+                            height: 100%;
+                            max-width: 100%;
+                        }
+                    }
+
+                    &.open {
+                        .more {
+                            opacity: 0;
+                            visibility: hidden;
+                            display: none;
+                        }
+
+                        .less {
+                            opacity: 1;
+                            visibility: visible;
+                            display: block;
+                        }
+                    }
+                }
+            }
+
+            @media screen and (max-width: 560px) {
+                & {
+                    width: 100%;
+                    padding-left: 0;
+
+                    .date {
+                        margin-bottom: 35px;
+                    }
+
+                    .thumb {
+                        margin-bottom: 35px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.my-hover {
+    transition: all .6s;
+
+    &:hover {
+        opacity: .5;
+    }
+}
+
+
+.customDownloadGroup {
+    width: 100%;
+    @extend .flex;
+    @extend .flex-wrap;
+    @extend .flex-v-start;
+    @extend .flex-h-center;
+    position: relative;
+    margin-bottom: 200px;
+    padding-bottom: 250px;
+
+
+    &__cont {
+        width: 100%;
+        @extend .flex;
+        @extend .flex-wrap;
+        @extend .flex-v-start;
+        @extend .flex-h-center;
+    }
+
+    &:last-child:not(.primary) {
+        margin-bottom: 0;
+
+    }
+
+    &__line {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        width: 30px;
+        height: 100%;
+        background: transparent;
+
+        @media screen and (max-width:560px) {
+            width: 15px;
+        }
+    }
+
+    &__inner {
+        width: 100%;
+        max-width: 1650px;
+        @extend .flex;
+        @extend .flex-wrap;
+        @extend .flex-v-start;
+        @extend .flex-h-start;
+    }
+
+    &__title {
+        display: block;
+        margin-bottom: 85px;
+        @include font('Simplicita Pro', 40px, $COLOR_GREY, 500, 50px);
+        padding-left: 75px;
+
+        &:after {
+            width: calc(100% + 65px);
+            display: block;
+            content: '';
+            height: 6px;
+            background-color: transparent;
+            margin-top: 5px;
+
+            @media screen and (max-width:560px) {
+                width: 100%;
+            }
+        }
+
+        @media screen and (max-width:560px) {
+            font-size: 30px;
+            line-height: 40px;
+            padding: 0 45px;
+            margin-bottom: 40px;
+        }
+    }
+
+    &__item {
+        width: 100%;
+        @extend .flex;
+        @extend .flex-wrap;
+        @extend .flex-v-start;
+        @extend .flex-h-start;
+        padding: 20px 75px 45px 75px;
+        border-bottom: 1px solid #D8D8D8;
+
+        .file-date {
+            width: 100%;
+            text-align: left;
+            @include font('Simplicita Pro', 12px, $COLOR_GREY, 500, 20px);
+            margin-bottom: 10px;
+        }
+
+        .info {
+            width: 100%;
+            @extend .flex;
+            @extend .flex-wrap;
+            @extend .flex-v-center;
+            @extend .flex-h-between;
+
+            &_left {
+                @extend .flex;
+                @extend .flex-wrap;
+                @extend .flex-v-center;
+                @extend .flex-h-start;
+
+                @media screen and (max-width:560px) {
+                    width: 100%;
+                }
+            }
+
+            &_right {
+                @extend .flex;
+                @extend .flex-wrap;
+                @extend .flex-v-center;
+                @extend .flex-h-start;
+
+                @media screen and (max-width:560px) {
+                    width: 100%;
+                }
+            }
+        }
+
+        .file-name {
+            @include font('Simplicita Pro', 18px, $COLOR_BLACK, 400, 24px);
+
+            @media screen and (max-width:560px) {
+                font-size: 16px;
+                line-height: 22px;
+                margin-bottom: 10px;
+            }
+        }
+
+        .file-size {
+            @include font('Simplicita Pro', 12px, $COLOR_GREY, 500, 20px);
+            margin-right: 30px;
+        }
+
+        .file-download {
+            display: block;
+            width: 20px;
+            height: 20px;
+            background-position: center;
+            background-size: contain;
+            background-repeat: no-repeat;
+            margin-right: 40px;
+            background-image: url('./images/icon-download_file.svg');
+            transition: all .6s;
+
+            &:hover {
+                opacity: .5;
+            }
+        }
+
+        .file-view {
+            display: block;
+            width: 20px;
+            height: 20px;
+            background-position: center;
+            background-size: contain;
+            background-repeat: no-repeat;
+            margin-right: 40px;
+            background-image: url('./images/icon-eye_file.svg');
+            transition: all .6s;
+
+            &:hover {
+                opacity: .5;
+            }
+        }
+
+        .file-share {
+            position: relative;
+
+            &__toggler {
+                display: block;
+                width: 20px;
+                height: 20px;
+                background-position: center;
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-image: url('./images/icon-share-toggler.svg');
+                transition: all .6s;
+                cursor: pointer;
+
+                &:hover {
+                    opacity: .5;
+                }
+            }
+
+            &__dropdown {
+                position: absolute;
+                padding: 10px;
+                border-radius: 5px;
+                box-shadow: rgba(0, 0, 0, .15);
+                right: 0;
+                top: 25px;
+                width: auto;
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
+        @media screen and (max-width:560px) {
+            padding: 20px 45px 45px 45px;
+        }
+    }
+
+    &.primary {
+        order: 1;
+    }
+
+    &.secondary {
+        order: 2;
+    }
+
+    @media screen and (max-width:560px) {
+        padding-bottom: 100px;
+    }
+}
+
+.donwloadLine {
+    width: 100%;
+    @extend .flex;
+    @extend .flex-wrap;
+    @extend .flex-v-start;
+    @extend .flex-h-end;
+    padding: 45px 75px;
+
+    .linkUpload {
+        position: relative;
+        @extend .flex;
+        @extend .flex-wrap;
+        @extend .flex-v-end;
+        @extend .flex-h-start;
+        @include font('Simplicita Pro', 16px, $COLOR_BLACK, 400, 16px);
+        transition: all .6s;
+
+        &:after {
+            display: block;
+            content: '';
+            width: 20px;
+            height: 20px;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-image: url('./images/icon-download_file.svg');
+            margin-left: 20px;
+        }
+
+        &:hover {
+            opacity: 0.5;
+        }
+    }
+
+    @media screen and (max-width:560px) {
+        padding: 20px 45px 45px 45px;
+    }
+}
+
+.buttonlinkspecial {
+    width: 65px;
+    height: 65px;
+    background-image: url('./images/icon-download.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    position: fixed;
+    right: 0;
+    top: 500px;
+    z-index: 101;
+
+    @media screen and (max-width: 560px) {
+        display: none;
+    }
+}
+
+
+.specialNavigation {
+    width: 100%;
+    @extend .flex;
+    @extend .flex-wrap;
+    @extend .flex-v-start;
+    @extend .flex-h-end;
+    position: relative;
+    z-index: 25;
+
+    &__title {
+        width: auto;
+        @include font('Simplicita Pro', 15px, $COLOR_BLACK, 400, 25px);
+        margin-right: 10px;
+
+        @media screen and (max-width:560px) {
+            font-size: 10px;
+            line-height: 20px;
+        }
+    }
+
+    &__items {
+        width: auto;
+        @extend .flex;
+        @extend .flex-wrap;
+        @extend .flex-v-start;
+        @extend .flex-h-start;
+        @extend .flex-direction-column;
+    }
+
+    &__link {
+        @extend .flex;
+        @extend .flex-wrap;
+        @extend .flex-v-center;
+        @extend .flex-h-start;
+        margin-bottom: 10px;
+        @include font('Simplicita Pro', 15px, $COLOR_BLACK, 400, 25px);
+        transition: all .6s;
+
+        .color_square {
+            width: 20px;
+            height: 20px;
+            background-color: transparent;
+            margin-right: 10px;
+
+            @media screen and (max-width:560px) {
+                width: 12px;
+                height: 12px;
+            }
+        }
+
+        .item-name {
+            @extend .flex;
+            @extend .flex-wrap;
+            @extend .flex-v-center;
+            @extend .flex-h-start;
+            width: auto;
+            @include font('Simplicita Pro', 15px, $COLOR_BLACK, 400, 25px);
+
+            &:after {
+                content: '';
+                display: block;
+                background-repeat: no-repeat;
+                background-position: center center;
+                background-size: cover;
+                background-image: url('./images/icon-arrow.svg');
+                margin-left: 15px;
+                width: 35px;
+                height: 20px;
+
+                @media screen and (max-width:560px) {
+                    width: 25px;
+                    height: 10px;
+                }
+            }
+
+            @media screen and (max-width:560px) {
+                font-size: 10px;
+                line-height: 20px;
+            }
+        }
+
+
+        &.disabled {
+            opacity: .35;
+            cursor: default;
+
+            .item-name {
+                &:after {
+                    display: none;
+                }
+            }
+
+            &:hover {
+                opacity: .35;
+            }
+        }
+
+        &:hover {
+            opacity: .7;
+        }
+    }
+}
+
+.cookieBanner {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    min-height: 80px;
+    @extend .flex;
+    @extend .flex-wrap;
+    @extend .flex-v-center;
+    @extend .flex-h-center;
+    padding: 15px 35px;
+    background: $COLOR_WHITE;
+    border-top: solid 1px #F0F0F0;
+    @include font('Semplicita Pro', 15px, $COLOR_GREY, 400, 25px);
+    z-index: 999;
+
+    a {
+        display: block;
+        margin: 0 5px;
+        transition: all .6s;
+        @include font('Semplicita Pro', 15px, #055a1c, 400, 25px);
+
+        &:hover {
+            opacity: .5;
+        }
+    }
+
+    button {
+        cursor: pointer;
+        font: inherit;
+        font-weight: normal;
+        color: #FFFFFF;
+        background-color: #055a1c;
+        border: solid 1px #055a1c;
+        border-color: #055a1c;
+        padding: 10px 25px;
+        outline: none;
+        @include font('Semplicita Pro', 15px, $COLOR_WHITE, 400, 25px);
+
+        &:hover {
+            opacity: .5;
+        }
+    }
+}
+
+.w-580 {
+    max-width: 580px;
+    width: 100%;
+}
+
+.specialTable {
+    width: 100%;
+    @extend .flex;
+    @extend .flex-wrap;
+    @extend .flex-v-start;
+    @extend .flex-h-center;
+
+    &__columns {
+        width: 100%;
+        @extend .flex;
+        @extend .flex-wrap;
+        @extend .flex-v-start;
+        @extend .flex-h-center;
+
+        .column {
+            width: 100%;
+            @extend .flex;
+            @extend .flex-wrap;
+            @extend .flex-v-start;
+            @extend .flex-h-center;
+            border-bottom: 1px solid $COLOR_WHITE;
+            padding: 15px 0;
+            @include font('Semplicita Pro', 13px, transparent, 400, 15px);
+
+            .subColumn {
+                width: 30%;
+                @extend .flex;
+                @extend .flex-wrap;
+                @extend .flex-v-start;
+                @extend .flex-h-end;
+
+                &:first-child {
+                    @extend .flex-h-start;
+                    font-weight: 600;
+                }
+
+                &.big {
+                    width: 40%;
+                }
+            }
+
+            &:last-child {
+                border-bottom: none;
+                border-top: 2px solid $COLOR_WHITE;
+            }
+
+            @media screen and (max-width:560px) {
+                font-size: 7px;
+                line-height: 8px;
+            }
+        }
+
+        &.white {
+            .column {
+                color: $COLOR_WHITE;
+            }
+        }
+
+        &.dark {
+            .column {
+                color: $COLOR_BLACK;
+            }
+        }
+    }
+}
+
+.my-special-logo-bg .elementor-column-wrap {
+    position: relative;
+
+    &:before {
+        content: '';
+        background-image: url('./images/special-logo-big.svg');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center center;
+        display: block;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 5%;
+        width: 90%;
+        height: 90%;
+        z-index: 1;
+    }
+}
+
+.my-special-logo-bg-big .elementor-column-wrap {
+    position: relative;
+
+    &:before {
+        content: '';
+        background-image: url('./images/special-logo-big.svg');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center center;
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width:400px;
+        height: 400px;
+        z-index: 1;
+    }
+}
+
+.basic-page {
+    @include font('Semplicita Pro', 15px, $COLOR_GREY, 400, 25px);
+    word-break: break-word;
+
+    h2 {
+        width: 100%;
+        margin: 30px 0;
+        @include font('Semplicita Pro', 30px, $COLOR_GREY, 500, 40px);
+    }
+
+    pre,
+    p,
+    a {
+        color: inherit;
+        font: inherit;
+        margin-bottom: 10px;
+    }
+
+    a {
+        transition: all .6s;
+        padding-bottom: 0px;
+        border-bottom: 1px solid $COLOR_GREY;
+
+        &:hover {
+            opacity: .5;
+        }
+    }
+}
+
+.my-special-list {
+    ul {
+        position: relative;
+        width: 100%;
+        list-style: none;
+        li {
+            position: relative;
+            width: 100%;
+            margin-bottom: 25px;
+            text-indent: 30px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            &:before {
+                content: '';
+                display: block;
+                width: 5px;
+                height: 5px;
+                position: absolute;
+                top: 5px;
+                left: 0;
+                border-radius: 50%;
+                margin-right: 30px;
+                background: $COLOR_GREY;
+            }   
+        }
+    }
+}
+
+
+.shortTable {
+    .specialTable {
+        .column  {
+            padding-top: 0px;
+            padding: 5px 0;
+
+            .subColumn {
+                width: 33.33333333%;
+                &:first-child {
+                    font-weight: 400;
+                }
+            }
+
+            &:first-child {
+                padding-bottom: 15px;
+                .subColumn {
+                    font-weight: 600;
+                }
+            }
+
+            &:last-child {
+                border-top: 0;
+            }
+
+            &:nth-last-child(2) {
+                .subColumn {
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+}
