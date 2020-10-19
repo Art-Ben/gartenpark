@@ -8,12 +8,14 @@ window.addEventListener('resize', () => {
 
 jQuery(document).ready(function () {
 
-  if( Cookies.get('cookieBanner') == 'yes') {
+  if (Cookies.get('cookieBanner') == 'yes') {
     $('.cookieBanner').hide();
   }
 
-  $('.acceptCookie').click(function(){
-    Cookies.set('cookieBanner', 'yes', { expires: 7 });
+  $('.acceptCookie').click(function () {
+    Cookies.set('cookieBanner', 'yes', {
+      expires: 7
+    });
     $('.cookieBanner').hide(600);
   })
 
@@ -45,8 +47,24 @@ jQuery(document).ready(function () {
     };
   });
 
-  const media = $('.page__intro_poster').get(0);
-  var mediaElementInstance = new MediaElementPlayer('.my-player');
+  var media = $('.my-player').get(0);
+  
+  var videoHeader = new MediaElementPlayer(media, {
+    alwaysShowControls: false,
+    autoplay:true,
+    loop: true,
+    features: [],
+    success: function (mediaElement, originalNode, instance) {
+      mediaElement.addEventListener('canplay', function() {
+          mediaElement.play();
+      }, false);
+    }
+  });
+  
+
+  /*if ($('.my-player').length > 0) {
+    $("div.mejs-button.mejs-playpause-button.mejs-play > button").trigger('click');
+  }*/
 
   $('.my-select').select2({
     minimumResultsForSearch: -1,
@@ -59,15 +77,15 @@ jQuery(document).ready(function () {
     return (!val || 0 === val.length);
   }
 
-  $('.customCtaForm__form').find('#type').on('change', function(e){
-    if( $(this).val() ) {
+  $('.customCtaForm__form').find('#type').on('change', function (e) {
+    if ($(this).val()) {
       $(this).removeClass('error');
     }
     console.log($(this).val());
   });
 
-  $('.customCtaForm__form').find('#terms').on('change', function(e){
-    if( $(this).prop('checked') == true ) {
+  $('.customCtaForm__form').find('#terms').on('change', function (e) {
+    if ($(this).prop('checked') == true) {
       $(this).parents('.my-checkbox-grp_cont').removeClass('error');
     }
   });
@@ -75,7 +93,7 @@ jQuery(document).ready(function () {
   $('.customCtaForm__form').submit(function (e) {
     e.preventDefault();
     var _this = $(this);
-    var name, lastname_elem, terms_elem, terms_checked ,newsletter_elem, lastname, tel, email, type, message, button, name_elem, tel_elem, email_elem, type_elem, message_elem;
+    var name, lastname_elem, terms_elem, terms_checked, newsletter_elem, lastname, tel, email, type, message, button, name_elem, tel_elem, email_elem, type_elem, message_elem;
     button = _this.find('.my-sbm');
 
     name_elem = _this.find('#name');
@@ -97,8 +115,8 @@ jQuery(document).ready(function () {
     terms_checked = terms_elem.prop('checked');
 
     console.log(terms_elem, terms_checked);
-    
-    if( newsletter_checked == true ) {
+
+    if (newsletter_checked == true) {
       newsletter_checked = 'checked';
     }
 
@@ -108,7 +126,7 @@ jQuery(document).ready(function () {
     var errors = '';
     var errors_obj = _this.data('messages');
 
-    var infoCont = _this.siblings('.afterSubmitBlock');
+    var infoCont = _this.parents('.customCtaForm').find('.afterSubmitBlock');
 
     var data = new FormData();
     data.append('action', 'sendcontactform');
@@ -170,7 +188,7 @@ jQuery(document).ready(function () {
       removeErrorClass(email_elem, 'error');
     }
 
-    if( terms_checked !== true ) {
+    if (terms_checked !== true) {
       error = true;
       _this.find('#terms').parents('.my-checkbox-grp_cont').addClass('error');
     }
@@ -191,7 +209,8 @@ jQuery(document).ready(function () {
         success: function (data) {
           if (data.response == "SUCCESS") {
             button.removeClass('loading');
-            _this.fadeOut(600);
+            _this.parents('.customCtaForm__cont').find('.customCtaForm__info').fadeOut(600);
+            _this.parents('.customCtaForm__cont').find('.customCtaForm__instence').fadeOut(600);
 
             infoCont.delay(600).fadeIn(600).addClass('success').html(errors_obj.success);
           } else {
@@ -237,21 +256,87 @@ jQuery(document).ready(function () {
 
   var target = $(location).attr("hash");
   var offset = ($(this).attr('data-offset') ? $(this).attr('data-offset') : 0);
-  if(target) {
-      $('body,html').animate({
-        scrollTop: $(target).offset().top
-      }, 1000);
+  if (target) {
+    $('body,html').animate({
+      scrollTop: $(target).offset().top
+    }, 1000);
   }
 
   $('.mySpecialPostBlock .postMore').click(function () {
     $(this).parents('.mySpecialPostBlock').find('.postContent__short').fadeToggle(500);
     $(this).parents('.mySpecialPostBlock').find('.postContent__full').delay(500).fadeToggle(500);
 
-    if( $(this).hasClass('open') ) {
+    if ($(this).hasClass('open')) {
       $(this).removeClass('open');
     } else {
       $(this).addClass('open');
     }
   });
 
-})
+
+  /*--- Special search for Blog page ---*/
+  $('.myPostsBlock__form').submit(function () {
+    var searchTermElem, searchTermVal, resultBlock, error, data, emptyResult;
+
+    error = false;
+
+    emptyResult = $(this).data('empty');
+
+    searchTermElem = $(this).find('#search_phrase');
+    searchTermVal = searchTermElem.val();
+
+    resultBlock = $(this).parents('.myPostsBlock__searchForm').siblings('.myPostsBlock__items');
+
+    if (checkEmpty(searchTermVal)) {
+      error = true;
+      searchTermElem.addClass('err');
+    } else {
+      searchTermElem.removeClass('err');
+    }
+
+    data = new FormData();
+    data.append('action', 'customseacrh');
+    data.append('query', searchTermVal);
+
+    if (!error) {
+      $.ajax({
+        url: ajax_object.ajaxurl,
+        data: data,
+        type: 'POST',
+        processData: false,
+        contentType: false,
+        dataType: "json",
+
+        success: function (data) {
+          if (data.response == "SUCCESS") {
+            resultBlock.html(data.output);
+          } else {
+            console.log(data.error);
+            resultBlock.html(`<span class="noPostsFound">${emptyResult}</span>`);
+          }
+        },
+      })
+    } else {
+      //infoCont.fadeIn(600).removeClass('success').addClass('errors').html(errors);
+    }
+  });
+  /*--- END ---*/
+
+  /*--- TWO column block slider ---*/
+  $('.use-slider-for-twoColumnBLock').flickity({
+    wrapAround: false,
+    pageDots: true,
+    prevNextButtons: false,
+    contain: false,
+    cellAlign: 'center',
+    adaptiveHeight: false
+  })
+  /*--- END ---*/
+
+  /*------*/
+});
+
+/*$(window).bind('load', function () {
+  $("div.mejs-button.mejs-playpause-button.mejs-play > button").trigger('click');
+})*/
+

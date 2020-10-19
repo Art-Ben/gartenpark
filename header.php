@@ -86,7 +86,6 @@
 			</div>
 			<div class="header__line">
 				<div class="header__socials">
-					<button class="header__socials--btn"></button>
 					<div class="header__socials--hidden">
 						<?php
 							if( have_rows('social_links', 'options') ) {
@@ -97,6 +96,7 @@
 							}
 						?>
 					</div>
+					<button class="header__socials--btn"></button>
 				</div>
 			</div>
 		</div>

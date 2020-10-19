@@ -20,6 +20,9 @@ require_once $templatePath.'/inc/init_application_cpt.php';
 // require ajax contact form
 require_once $templatePath.'/inc/ajax-contact-form.php';
 
+// require ajax serach for Blog
+require_once $templatePath.'/inc/ajax-search_posts.php';
+
 // elementor custom breadcrumbs widget
 require_once $templatePath.'/inc/elementor-widgets/elementor-widget_breadcrumbs.php';
 
@@ -40,5 +43,14 @@ require_once $templatePath.'/inc/elementor-widgets/elementor-widget_specnav.php'
 
 // elementor special table widget
 require_once $templatePath.'/inc/elementor-widgets/elementor-widget_specialtable.php';
+
+// elementor two column text block widget
+require_once $templatePath.'/inc/elementor-widgets/elementor-widget_twocolumn.php';
+
+// elementor linlinline widget
+require_once $templatePath.'/inc/elementor-widgets/elementor-widget_links.php';
+
+// elementor chart element
+require_once $templatePath.'/inc/elementor-widgets/elementor-widget_specialchart.php';
 
 

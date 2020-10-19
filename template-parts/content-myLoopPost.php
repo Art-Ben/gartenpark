@@ -15,11 +15,13 @@ $post_lessBtnText = '';
 switch( ICL_LANGUAGE_CODE ) {
     case 'de':
         $post_moreBtnText = 'Mehr erfahren';
+        $post_pressBtn = 'Zur Wiener Komfortwohnungen Presseseite.';
         $post_lessBtnText = 'Ausblenden';
     break;
 
     case 'en':
         $post_moreBtnText = 'Read more';
+        $post_pressBtn = 'Wiener Komfortwohnungen press releases';
         $post_lessBtnText = 'Less';
     break;
 }
@@ -55,10 +57,22 @@ switch( ICL_LANGUAGE_CODE ) {
 
             <div class="postContent__full">
                 <?= $post_contentBig; ?>
+                <?php
+                    if( get_field('postPressRelize') ) {
+                ?>
+                <a target="_blank" href="<?= get_field('postPressRelize') ;?>" class="postPress">
+                    <span class="more">
+                        <?= $post_pressBtn ?>
+                    </span>
+                </a>
+                <?php
+                    }
+                ?>
             </div>
         </div>
 
         <div class="postMoreLine">
+
             <button class="postMore">
                 <span class="more">
                     <?= $post_moreBtnText; ?>

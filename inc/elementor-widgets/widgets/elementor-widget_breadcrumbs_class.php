@@ -115,6 +115,14 @@ class Elementor_Breadcrumbs_Widget extends Widget_Base {
 
         global $post;
 
+        $homepageText = '';
+
+        if( ICL_LANGUAGE_CODE == 'en' ) {
+            $homepageText = 'Homepage';
+        } elseif( ICL_LANGUAGE_CODE == 'de' ) {
+            $homepageText = 'Startseite';
+        }
+
 		$settings = $this->get_settings_for_display();
 
 		$pageNum = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
@@ -133,12 +141,12 @@ class Elementor_Breadcrumbs_Widget extends Widget_Base {
             if( $pageNum > 1 ) {
                 $outputLine.= '
                 <a itemprop="item" href="' . site_url() . '">
-                    <span itemprop="name" class="homePageElem">'._x('Startseite','homepage','gartenpark').'</span>
+                    <span itemprop="name" class="homePageElem">'.$homepageText.'</span>
                 </a>' . $separator . $pageNum . '- seite
                 <meta itemprop="position" content="'. $pageNum .'" />';
             } else {
                 $outputLine.= '
-                    <span itemprop="name" class="homePageElem">'. _x('Startseite','homepage','gartenpark'). '</span>
+                    <span itemprop="name" class="homePageElem">'.$homepageText. '</span>
                     <meta itemprop="position" content="1" />
                 ';
             }
@@ -152,7 +160,7 @@ class Elementor_Breadcrumbs_Widget extends Widget_Base {
 
                 $outputLine.= '
                 <a href="' . site_url() . '">
-                    <span itemprop="name" class="homePageElem">'. _x('Startseite','homepage','gartenpark') .'</span>
+                    <span itemprop="name" class="homePageElem">'. $homepageText .'</span>
                 </a>' . $separator;
     
             $outputLine.= '</li>';

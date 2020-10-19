@@ -6,6 +6,7 @@ add_action( 'after_setup_theme', 'gartenpark_initMenu' );
 function gartenpark_initMenu() {
 	register_nav_menu( 'primary', 'Hauptmenü' );
 	register_nav_menu( 'footer', 'Fußzeilenmenüs');
+	register_nav_menu( 'mobile', 'Mobiles Menü');
 }
 
 

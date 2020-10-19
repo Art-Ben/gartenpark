@@ -5,21 +5,147 @@
     @extend .flex-v-start;
     @extend .flex-h-center;
     background: $COLOR_WHITE;
-    padding: 80px 0;
+    padding: 50px 0 80px 0;
+    border-top: 3px solid #EDEDED;
+    border-bottom: 15px solid #f7f7f7;
 
     &__cont {
         width: 100%;
-        max-width: 1000px;
+        max-width: 1250px;
         @extend .flex;
         @extend .flex-wrap;
-        @extend .flex-v-end;
+        @extend .flex-v-stretch;
         @extend .flex-h-between;
+        padding-top: 30px;
 
         @media screen and (max-width:560px) {
             & {
-                padding: 0 35px;
-                align-items: stretch;
+                padding: 0;
             }
+        }
+    }
+
+    &__specialBlock {
+        width: 100%;
+        max-width: 250px;
+        padding: 20px 10px;
+        background: transparent;
+        @extend .flex;
+        @extend .flex-wrap;
+        @extend .flex-v-center;
+        @extend .flex-c-center;
+        @extend .flex-h-center;
+        text-decoration: none;
+
+        .tit {
+            width: 100%;
+            display: block;
+            text-align: center;
+            @include font('Semplicita Pro', 18px,$COLOR_GREY, 400, 26px);
+            margin-bottom: 20px;
+
+            @media screen and (max-width:560px) {
+                font-size: 12px;
+                line-height: 20px;
+                margin-bottom: 10px;
+            }
+        }
+
+        img {
+            width: 100%;
+            max-width: 180px;
+            height: auto;
+
+            @media screen and (max-width:560px) {
+                max-width: 110px;
+                margin: 0 auto;
+            }
+        }
+
+        @media screen and (max-width:560px) {
+            max-width: 100%;
+            margin-bottom: 25px;
+            background: #fbfbfb;
+        }
+    }
+
+    &__rightSide {
+        width: 100%;
+        max-width: 650px;
+        @extend .flex;
+        @extend .flex-wrap;
+        @extend .flex-v-end;
+        @extend .flex-c-end;
+        @extend .flex-h-start;
+
+        .line {
+            width: 100%;
+            margin-bottom: 25px;
+
+            &:first-child {
+                @extend .flex;
+                @extend .flex-wrap;
+                @extend .flex-v-center;
+                @extend .flex-h-between;
+
+                @media screen and (max-width:560px) {
+                    display: none;
+                }
+            }
+            
+            &:last-child {
+                margin-bottom: 0;
+
+                
+            }
+        }
+
+        @media screen and (max-width:560px) {
+            max-width: 100%;
+        }
+    }
+
+    &__specialText {
+        width: 100%;
+        padding: 25px 45px;
+        background: transparent;
+        @extend .flex;
+        @extend .flex-wrap;
+        @extend .flex-v-center;
+        @extend .flex-h-end;
+
+        &--image {
+            width: auto;
+            max-width: 150px;
+            margin-right: 50px;
+
+            @media screen and (max-width:560px) {
+                margin-right: 0;
+                max-width: 100px;
+                margin: 0 auto;
+                margin-bottom: 10px;
+            }
+        }
+
+        &--txt {
+            width: auto;
+            max-width: calc(100% - 200px);
+            @include font('Semplicita Pro', 18px,$COLOR_GREY, 400, 26px);
+            b {
+                font-weight: 500;
+            }
+
+            @media screen and (max-width:560px) {
+                max-width: 100%;
+                font-size: 12px;
+                line-height: 20px;
+                text-align: center;
+            }
+        }
+
+        @media screen and (max-width:560px) {
+            margin-bottom: 25px;
+            background: #fbfbfb;
         }
     }
 
@@ -40,9 +166,26 @@
                 max-width: 100%;
             }
 
+        }
+        
+        @media screen and (max-width:560px) {
+            & {
+                display: none;
+            }
+        }
+
+        &_mobile {
+            display: none;
+            width: 100%;
+            max-width: 100px;
+            @extend .flex-wrap;
+            @extend .flex-v-start;
+            @extend .flex-h-start;
+            margin: 0 auto -20px auto;
+
             @media screen and (max-width:560px) {
                 & {
-                    max-width: 85px;
+                    display: flex;
                 }
             }
         }
@@ -64,7 +207,6 @@
     }
 
     &__menu {
-
         &_mobile {
             display: none;
             width: 100%;
@@ -117,6 +259,7 @@
                 margin-left: auto;
                 display: none;
                 &_mobile {
+                    margin-top: 25px;
                     display: flex;
                     width: 100%;
                     justify-content: space-between;
@@ -180,12 +323,15 @@
         @extend .flex-v-start;
         @extend .flex-h-between;
         @extend .flex-direction-column;
-        width: calc(100% - 85px);
-        padding-left: 40px;
+        width: 100%;
+        padding: 0 30px;
 
         @media screen and (max-width:560px) {
             @include flex;
         }
     }
 
+    @media screen and (max-width:560px) {
+        padding-bottom: 40px;
+    }
 }

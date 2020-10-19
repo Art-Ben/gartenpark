@@ -202,7 +202,9 @@ class Elementor_primarySlider_Widget extends Widget_Base {
         $home_url = is_front_page() ? 'javascript:void(0);' : get_home_url();
         $video_config_arr = array(
             'alwaysShowControls' => false,
-            'features' => []
+            'features' => [],
+            'autoplay' => true,
+            'loop' => true
         );
         $video_config = json_encode($video_config_arr);
 
@@ -249,7 +251,7 @@ class Elementor_primarySlider_Widget extends Widget_Base {
                     ';
                         if( $slide['slide_is_video'] === 'yes' ) {
                             echo '
-                                <video height="100%" width="100%" class="page__intro_poster my-player mejs__player" poster="'. $slide['slide_poster']['url'] .'" data-mejsoptions='. $video_config .'>
+                                <video autoplay loop muted="muted" playsinline width="100%" height="100%" class="page__intro_poster my-player" poster="'. $slide['slide_poster']['url'] .'">
                                     <source src="'. $slide['slide_video_upload'] .'" type="video/mp4">
                                 </video>
                             ';
@@ -270,7 +272,7 @@ class Elementor_primarySlider_Widget extends Widget_Base {
             foreach( $settings['page_slider'] as $slide ) {
                 if( $slide['slide_is_video'] === 'yes' ) {
                     echo '
-                        <video height="100%" width="100%" class="page__intro_poster my-player mejs__player" poster="'. $slide['slide_poster']['url'] .'" data-mejsoptions='. $video_config .'>
+                        <video autoplay loop muted="muted" playsinline height="100%" width="100%" class="page__intro_poster my-player" poster="'. $slide['slide_poster']['url'] .'">
                             <source src="'. $slide['slide_video_upload'] .'" type="video/mp4">
                         </video>
                     ';

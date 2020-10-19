@@ -94,7 +94,7 @@ class Elementor_myPosts_Widget extends Widget_Base {
 				'type' => \Elementor\Controls_Manager::NUMBER,
 				'label_block' => true,
                 'placeholder' => __('Our value','gartenpark'),
-                'min' => 1,
+                'min' => -1,
 				'max' => 10,
 				'step' => 1,
 				'default' => 2
@@ -158,10 +158,25 @@ class Elementor_myPosts_Widget extends Widget_Base {
             'post_status' => 'publish',
             'orderby' => $settings['orderby'],
             'order' => $settings['order']
-        );
+		);
+		
+		if( ICL_LANGUAGE_CODE == 'de') {
+			$searchPlaceholder = 'Suche';
+			$emptyResult = 'Leider gibt es zu Ihrer Suche kein Ergebnis. Bitte versuchen Sie es mit anderen Suchbegriffen.';
+		} elseif ( ICL_LANGUAGE_CODE  == 'en') {
+			$searchPlaceholder = 'Search query';
+			$emptyResult = 'Unfortunately there are no results for your search. Please try other search terms.';
+		}
 
         $basic_posts_query = new \WP_Query($basic_posts_args);
-        echo '<div class="myPostsBlock">';
+		echo '<div class="myPostsBlock">';
+			echo '<div class="myPostsBlock__searchForm">';
+				echo '
+				<form class="myPostsBlock__form" method="post" action="javascript:void(0);" data-empty="'. $emptyResult .'">
+					<button type="submit" class="btnSubm"></button>
+					<input type="text" placeholder="'. $searchPlaceholder .'" id="search_phrase" name="search_phrase" class="searchInpt">
+				</form>';
+			echo '</div><div class="myPostsBlock__items">';
         if( $basic_posts_query->have_posts() ) {
             while( $basic_posts_query->have_posts() ) {
                 $basic_posts_query->the_post();
@@ -171,7 +186,7 @@ class Elementor_myPosts_Widget extends Widget_Base {
         } else {
             echo '<span class="noPostsFound">'._x('Keine Beiträge gefunden','no-posts','gartenpark').'</span>';
         }
-        echo '</div>';
+        echo '</div></div>';
 	}
 }
 

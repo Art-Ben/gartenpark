@@ -63,9 +63,28 @@
                 top: 130px;
                 z-index: 1;
                 text-align: center;
+                @extend .flex;
+                @extend .flex-wrap;
+                @extend .flex-v-start;
+                @extend .flex-c-start;
+                @extend .flex-h-center;
                 img {
                     width: 100%;
                     max-width: 180px!important;
+                }
+
+                .special-smalll-text {
+                    width: 100%;
+                    display: block;
+                    text-transform: uppercase;
+                    margin-top: 10px;
+                    @include font('Semplicita Pro', 12px, $COLOR_GREY, 600, 20px);
+
+                    @media screen and (max-width:560px) {
+                        margin-top: 2px;
+                        font-size: 8px;
+                        line-height: 12px;
+                    }
                 }
             }
 
@@ -174,9 +193,9 @@
                     }
 
                     &_btn {
-                        padding: 7px 20px;
-                        font-size: 12px;
-                        line-height: 20px;
+                        padding: 5px 15px;
+                        font-size: 8px;
+                        line-height: 16px;
                         bottom: 80px;
                     }
                 }
